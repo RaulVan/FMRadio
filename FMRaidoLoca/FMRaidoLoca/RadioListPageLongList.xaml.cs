@@ -35,10 +35,10 @@ namespace FMRaidoLoca
 
             LoadedData();
 
-            this.radioListGropus.GroupViewOpened += new EventHandler<GroupViewOpenedEventArgs>(radioListGropus_GroupViewOpened);
-            this.radioListGropus.GroupViewClosing += new EventHandler<GroupViewClosingEventArgs>(radioListGropus_GroupViewClosing);
+            //this.radioListGropus.GroupViewOpened += new EventHandler<GroupViewOpenedEventArgs>(radioListGropus_GroupViewOpened);
+            //this.radioListGropus.GroupViewClosing += new EventHandler<GroupViewClosingEventArgs>(radioListGropus_GroupViewClosing);
 
-            this.radioListGropus.SelectionChanged += new SelectionChangedEventHandler(radioListGropus_SelectionChanged);
+            //this.radioListGropus.SelectionChanged += new SelectionChangedEventHandler(radioListGropus_SelectionChanged);
 
             this.Loaded += new RoutedEventHandler(RadioListPageLongList_Loaded);
             this.pivot.SelectionChanged += new SelectionChangedEventHandler(pivot_SelectionChanged);
@@ -75,7 +75,7 @@ namespace FMRaidoLoca
             
 
             var app = App.Current as App;
-            app.selectRasios = radioListGropus.SelectedItem as Radios;
+            app.selectRasios = listRadioList.SelectedItem as Radios;
             if (app.selectRasios != null)
             {
                 //this.NavigationService.Navigate(new Uri("/RadioMainPage.xaml", UriKind.Relative));
@@ -90,47 +90,47 @@ namespace FMRaidoLoca
             }
         }
 
-        void radioListGropus_GroupViewClosing(object sender, GroupViewClosingEventArgs e)
-        {
-            e.Cancel = true;
+        //void radioListGropus_GroupViewClosing(object sender, GroupViewClosingEventArgs e)
+        //{
+        //    e.Cancel = true;
 
-            SwivelTransition transition = new SwivelTransition();
-            ItemContainerGenerator itemContainerGenerator = e.ItemsControl.ItemContainerGenerator;
+        //    SwivelTransition transition = new SwivelTransition();
+        //    ItemContainerGenerator itemContainerGenerator = e.ItemsControl.ItemContainerGenerator;
 
-            int animationFinished = 0;
-            int itemCount = e.ItemsControl.Items.Count;
-            for (int i = 0; i < itemCount; i++)
-            {
-                UIElement element = itemContainerGenerator.ContainerFromIndex(i) as UIElement;
+        //    int animationFinished = 0;
+        //    int itemCount = e.ItemsControl.Items.Count;
+        //    for (int i = 0; i < itemCount; i++)
+        //    {
+        //        UIElement element = itemContainerGenerator.ContainerFromIndex(i) as UIElement;
 
-                ITransition animation = transition.GetTransition(element);
-                animation.Completed += delegate
-                {
-                    // close the group view when all animations have completed
-                    if ((++animationFinished) == itemCount)
-                    {
-                        radioListGropus.CloseGroupView();
-                        radioListGropus.ScrollToGroup(e.SelectedGroup);
-                    }
-                };
-                animation.Begin();
-            }
-        }
+        //        ITransition animation = transition.GetTransition(element);
+        //        animation.Completed += delegate
+        //        {
+        //            // close the group view when all animations have completed
+        //            if ((++animationFinished) == itemCount)
+        //            {
+        //                radioListGropus.CloseGroupView();
+        //                radioListGropus.ScrollToGroup(e.SelectedGroup);
+        //            }
+        //        };
+        //        animation.Begin();
+        //    }
+        //}
 
-        void radioListGropus_GroupViewOpened(object sender, GroupViewOpenedEventArgs e)
-        {
-            ItemContainerGenerator itemContainerGenerator = e.ItemsControl.ItemContainerGenerator;
-			TurnstileTransition turnstileTransition = new TurnstileTransition();
-			turnstileTransition.Mode = TurnstileTransitionMode.ForwardIn;
+        //void radioListGropus_GroupViewOpened(object sender, GroupViewOpenedEventArgs e)
+        //{
+        //    ItemContainerGenerator itemContainerGenerator = e.ItemsControl.ItemContainerGenerator;
+        //    TurnstileTransition turnstileTransition = new TurnstileTransition();
+        //    turnstileTransition.Mode = TurnstileTransitionMode.ForwardIn;
 
-			int itemCount = e.ItemsControl.Items.Count;
-            for (int i = 0; i < itemCount; i++)
-            {
-                UIElement element = itemContainerGenerator.ContainerFromIndex(i) as UIElement;
-                ITransition animation = turnstileTransition.GetTransition(element);
-                animation.Begin();
-            }
-        }
+        //    int itemCount = e.ItemsControl.Items.Count;
+        //    for (int i = 0; i < itemCount; i++)
+        //    {
+        //        UIElement element = itemContainerGenerator.ContainerFromIndex(i) as UIElement;
+        //        ITransition animation = turnstileTransition.GetTransition(element);
+        //        animation.Begin();
+        //    }
+        //}
 
         /// <summary>
         /// 绑定电台数据
@@ -159,7 +159,7 @@ namespace FMRaidoLoca
             //                   orderby c.Key
             //                   select new Group<Radios>(c.Key, c);
 
-            this.radioListGropus.ItemsSource = radioByGroup;
+            this.listRadioList.ItemsSource = radioByGroup.ToList();
 
             
 
