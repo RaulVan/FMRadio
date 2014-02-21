@@ -67,11 +67,13 @@ namespace FMRaidoLoca
             }
 
         }
-
+      
         // 应用程序启动(例如，从“开始”菜单启动)时执行的代码
         // 此代码在重新激活应用程序时不执行
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+             
+            
         }
 
         // 激活应用程序(置于前台)时执行的代码

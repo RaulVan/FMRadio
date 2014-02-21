@@ -225,6 +225,25 @@ namespace FMRaidoLoca
             
         }
 
-
+      
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+             
+            double current = (double)Application.Current.Resources["PhoneDarkThemeOpacity"];
+            //ThemeManager.OverrideOptions = ThemeManagerOverrideOptions.None;
+            //ThemeManager.ToDarkTheme();
+            if (current == 1)
+            {
+                gridLight.Visibility = Visibility.Visible;
+                gridBlack.Visibility = Visibility.Collapsed;
+                //currentTheme = Theme.Light;
+            }
+            else
+            {
+                gridBlack.Visibility = Visibility.Visible;
+                gridLight.Visibility = Visibility.Collapsed;
+            }
+            base.OnNavigatedTo(e);
+        }
     }
 }
