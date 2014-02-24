@@ -17,6 +17,7 @@ using FMRaidoLoca.Data;
 using Microsoft.Devices.Radio;
 using Microsoft.Phone.Info;
 using System.Diagnostics;
+using Com.MSN.Ads.WindowsPhone.SDK.View;
 
 
 namespace FMRaidoLoca
@@ -25,10 +26,32 @@ namespace FMRaidoLoca
     {
 
         FMRadio radio;
+        string adSpaceId1 = "ODA2fDkzN3wyOTA5fDE=";
+        string adSpaceId2 = "ODA2fDkzN3wyOTEwfDE=";
+        string adSpaceId3 = "ODA2fDkzN3wyOTExfDE=";
 
         public RadioListPageLongList()
         {
             InitializeComponent();
+
+            //TODO:Add AD 
+            Thickness adPosition = new Thickness();//定义广告banner的位置。
+            adPosition.Left = 0;
+            adPosition.Top = 0;
+            adPosition.Right = 0;
+            adPosition.Bottom = 0;
+            AdControl adControl = new AdControl(this);
+            adControl.InitAd(adPosition, adSpaceId1);//初始化广告banner
+
+            adControl.AdReveiceEvent += adControl_AdReveiceEvent;
+            adControl.AdFailedEvent += adControl_AdFailedEvent;
+            adControl.LeaveApplicationEvent += adControl_LeaveApplicationEvent;
+            adControl.PresentScreenEvent += adControl_PresentScreenEvent;
+            adControl.DismissScreenEvent += adControl_DismissScreenEvent;
+
+            gridAD.Children.Add(adControl);
+            adControl.LoadAd();
+
 
             //StartRadio();
 
@@ -53,8 +76,37 @@ namespace FMRaidoLoca
             }
             else if (pivot.SelectedIndex == 1)
             {
+
                 this.ApplicationBar.IsVisible = true;
+
+                
+
             }
+        }
+
+        void adControl_DismissScreenEvent(AdControl adControl)
+        {
+            Debug.WriteLine("---------MSNLog--------adControl_DismissScreenEvent");
+        }
+
+        void adControl_PresentScreenEvent(AdControl adControl)
+        {
+            Debug.WriteLine("---------MSNLog--------adControl_PresentScreenEvent");
+        }
+
+        void adControl_LeaveApplicationEvent(AdControl adControl)
+        {
+            Debug.WriteLine("---------MSNLog--------adControl_LeaveApplicationEvent");
+        }
+
+        void adControl_AdFailedEvent(ErrorCode errorCode, AdControl adControl)
+        {
+            Debug.WriteLine("---------MSNLog--------adControl_AdFailedEvent");
+        }
+
+        void adControl_AdReveiceEvent(AdControl adControl)
+        {
+            Debug.WriteLine("---------MSNLog--------adView_AdReveiceEvent");
         }
 
         void RadioListPageLongList_Loaded(object sender, RoutedEventArgs e)
