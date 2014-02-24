@@ -64,6 +64,7 @@
     <Reference Include="mscorlib.extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Serialization" />
+    <Reference Include="UmengAnalyticsWP7, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPage.xaml.cs">
@@ -113,6 +114,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="image\radio.png" />
+    <Content Include="image\Media-Pause.png" />
+    <Content Include="image\Media-Pause2.png" />
+    <Content Include="image\Media-Play.png" />
+    <Content Include="image\Media-Play2.png" />
+    <Content Include="lib\UmengAnalyticsWP7.dll" />
+    <Content Include="lib\UmengAnalyticsWP8.dll" />
     <Content Include="RadioList.xml" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>

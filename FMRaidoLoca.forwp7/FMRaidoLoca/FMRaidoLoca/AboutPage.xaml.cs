@@ -30,7 +30,7 @@ namespace FMRaidoLoca
         void AboutPage_Loaded(object sender, RoutedEventArgs e)
         {
             txtVersion.Text ="版本："+  GetVersion();
-            txtRemark.Text = "      目前本版本支持WP7手机，WP8手机部分(例如之前的Lumia520)不支持本地收音机，为了确保正常的使用调频收音机，需要设置国家和地区为“中国”，进入“设置”->“语言+区域”进行设置。请谅解！有新创意，也可邮件予我。";
+            txtRemark.Text = "   （China）   目前本版本支持WP7手机，WP8手机部分(例如之前的Lumia520)不支持本地收音机，为了确保正常的使用调频收音机，需要设置国家和地区为“中国”，进入“设置”->“语言+区域”进行设置。请谅解！有新创意，也可邮件予我。";
         }
 
         void emailLink_Click(object sender, RoutedEventArgs e)
@@ -85,6 +85,18 @@ namespace FMRaidoLoca
             }
 
             return version;
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            UmengSDK.UmengAnalytics.TrackPageEnd("AboutPage");
+            
+        }
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            UmengSDK.UmengAnalytics.TrackPageStart("AboutPage");
         }
     }
 }

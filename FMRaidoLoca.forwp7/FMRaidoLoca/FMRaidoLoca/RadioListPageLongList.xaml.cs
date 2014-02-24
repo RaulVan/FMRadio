@@ -78,6 +78,7 @@ namespace FMRaidoLoca
             catch (Exception ex )
             {
                 Debug.WriteLine(ex.Message);
+                UmengSDK.UmengAnalytics.TrackException(ex);
             }
             //if (pivot.SelectedIndex == 0)
             //{
@@ -92,22 +93,31 @@ namespace FMRaidoLoca
         void radioListGropus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Radios radios = radioListGropus.SelectedItem as Radios;
-            
 
-            var app = App.Current as App;
-            app.selectRasios = radioListGropus.SelectedItem as Radios;
-            if (app.selectRasios != null)
+            try
             {
-                //this.NavigationService.Navigate(new Uri("/RadioMainPage.xaml", UriKind.Relative));
-                pivot.SelectedIndex = 1;
+                var app = App.Current as App;
+                app.selectRasios = radioListGropus.SelectedItem as Radios;
+                if (app.selectRasios != null)
+                {
+                    //this.NavigationService.Navigate(new Uri("/RadioMainPage.xaml", UriKind.Relative));
+                    pivot.SelectedIndex = 1;
 
-                this.radioPivtoItem.Header = app.selectRasios.RadioName;
-                StartRadio();
-                radio = FMRadio.Instance;
-                //radio.PowerMode = RadioPowerMode.On;
-                radio.CurrentRegion = RadioRegion.Europe;
-                radio.Frequency = app.selectRasios.RadioFrequency;
+                    this.radioPivtoItem.Header = app.selectRasios.RadioName;
+                    StartRadio();
+                    radio = FMRadio.Instance;
+                    //radio.PowerMode = RadioPowerMode.On;
+                    radio.CurrentRegion = RadioRegion.Europe;
+                    radio.Frequency = app.selectRasios.RadioFrequency;
+                }
             }
+            catch (Exception ex)
+            {
+                
+                  UmengSDK.UmengAnalytics.TrackException(ex);
+            }
+
+           
         }
 
         void radioListGropus_GroupViewClosing(object sender, GroupViewClosingEventArgs e)
@@ -191,11 +201,12 @@ namespace FMRaidoLoca
             {
                 FMRadio.Instance.PowerMode = RadioPowerMode.On;
             }
-           catch
+           catch(Exception ex)
             {
-                MessageBox.Show("This phone uses your headphones as an FM radio " +
-          "antenna. To listen to radio, connect your headphones.", "No antenna",
-          MessageBoxButton.OK);
+          //      MessageBox.Show("This phone uses your headphones as an FM radio " +
+          //"antenna. To listen to radio, connect your headphones.", "No antenna",
+          //MessageBoxButton.OK);
+                UmengSDK.UmengAnalytics.TrackException(ex);
             }
         }
 
@@ -205,7 +216,10 @@ namespace FMRaidoLoca
             {
                 FMRadio.Instance.PowerMode = RadioPowerMode.Off;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                UmengSDK.UmengAnalytics.TrackException(ex);
+            }
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
@@ -244,6 +258,14 @@ namespace FMRaidoLoca
                 gridLight.Visibility = Visibility.Collapsed;
             }
             base.OnNavigatedTo(e);
+            UmengSDK.UmengAnalytics.TrackPageStart("RadioListPageLongList");
+
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            UmengSDK.UmengAnalytics.TrackPageEnd("RadioListPageLongList");
         }
     }
 }

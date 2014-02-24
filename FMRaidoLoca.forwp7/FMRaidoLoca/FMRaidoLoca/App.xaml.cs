@@ -66,6 +66,10 @@ namespace FMRaidoLoca
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+           
+                UmengSDK.UmengAnalytics.Init("5272033056240b9055118779", "Marketplace");
+            
+
         }
       
         // 应用程序启动(例如，从“开始”菜单启动)时执行的代码
@@ -92,7 +96,7 @@ namespace FMRaidoLoca
         // 此代码在停用应用程序时不执行
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            FMRadio.Instance.PowerMode = RadioPowerMode.On;
+           // FMRadio.Instance.PowerMode = RadioPowerMode.On;
         }
 
         // 导航失败时执行的代码
