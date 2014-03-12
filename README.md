@@ -9,4 +9,4 @@ Winodws Phone Store: [FM收音机](http://www.windowsphone.com/zh-cn/store/app/f
 
 Version
 =======
-Version 1.3.0
+Version 1.3.3.1
