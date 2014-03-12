@@ -98,5 +98,20 @@ namespace FMRaidoLoca
             base.OnNavigatedTo(e);
             UmengSDK.UmengAnalytics.TrackPageStart("AboutPage");
         }
+
+        private void Link1_Click(object sender, RoutedEventArgs e)
+        {
+            MarketplaceReviewTask task = new MarketplaceReviewTask();
+            task.Show();
+        }
+
+        private void Link2_Click(object sender, RoutedEventArgs e)
+        {
+
+            MarketplaceSearchTask task = new MarketplaceSearchTask();
+            task.ContentType = MarketplaceContentType.Applications;
+            task.SearchTerms = "ElevenVan";
+            task.Show();
+        }
     }
 }
